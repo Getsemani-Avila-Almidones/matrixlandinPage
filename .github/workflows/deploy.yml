@@ -34,3 +34,12 @@ jobs:
         port: 44322
         source: "."
         target: "/var/www/html"
+    - name: Verificar conexión SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: 201.163.93.2
+        username: github-action
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: 44322
+        script: whoami
+
