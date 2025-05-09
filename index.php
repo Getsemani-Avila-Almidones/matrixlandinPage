@@ -35,7 +35,7 @@
     </style>
 </head>
 <body>
-    <h1>🧪 Proyectos Disponibles en el Servidor</h1>
+    <h1>🧪 Proyectos Disponibles en la Matrix 🕶️</h1>
     <div class="project-list">
         <?php
         $base = __DIR__;
