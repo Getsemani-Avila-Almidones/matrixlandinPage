@@ -31,6 +31,6 @@ jobs:
         host: 201.163.93.2
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY }}
-        port: ${{ secrets.SERVER_PORT }}
+        port: 44322
         source: "."
         target: "/var/www/html"
