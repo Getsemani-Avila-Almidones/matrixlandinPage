@@ -11,25 +11,17 @@
 #   - No expone el servidor a internet; funciona solo en red local.
 # -----------------------------------------
 
-name: Despliegue Web Local
-
+name: Despliegue local con runner
 on:
   push:
     branches: [ "main" ]
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted
     steps:
-    - name: Clonar repositorio
-      uses: actions/checkout@v3
-
-    - name: Copiar archivos vía SSH
-      uses: appleboy/scp-action@v0.1.4
-      with:
-        host: ${{ secrets.SERVER_IP }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        source: "."
-        target: "/var/www/html"
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+      - name: Copiar archivos a /var/www/html
+        run: |
+          rsync -av --delete ./ /var/www/html/

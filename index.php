@@ -2,48 +2,66 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Servidor de Proyectos</title>
+    <title>Matrix - Proyectos Web</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1e1e1e;
-            color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #282a36; /* Dracula background */
+            color: #f8f8f2; /* Dracula foreground */
+            margin: 0;
             padding: 2em;
         }
         h1 {
             text-align: center;
+            margin-bottom: 2em;
+            font-size: 2.2em;
+            color: #bd93f9;
         }
         .project-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1em;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5em;
+            padding: 0 2em;
         }
         .project {
-            background-color: #2d2d2d;
-            padding: 1em 2em;
-            border-radius: 10px;
+            background-color: #44475a;
+            padding: 1.2em 1em;
+            border-radius: 12px;
             text-align: center;
             text-decoration: none;
-            color: #ffffff;
-            box-shadow: 0 0 10px #00000055;
-            transition: background-color 0.3s;
+            color: #f8f8f2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #6272a4;
         }
         .project:hover {
-            background-color: #3a3a3a;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+            background-color: #6272a4;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.6em;
+            }
+            .project-list {
+                padding: 0 1em;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>🧪 Proyectos Disponibles en el Servidor</h1>
+    <h1>Proyectos Disponibles</h1>
     <div class="project-list">
         <?php
-        $base = __DIR__;
+        $base = dirname(__DIR__);
         $dirs = array_filter(glob($base . '/*'), 'is_dir');
 
         foreach ($dirs as $dir) {
             $name = basename($dir);
-            echo "<a class='project' href='/$name/'>$name</a>";
+            if ($name !== "html") {
+                echo "<a class='project' href='/$name/'>$name</a>";
+            }
         }
         ?>
     </div>
