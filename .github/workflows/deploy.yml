@@ -28,7 +28,7 @@ jobs:
     - name: Copiar archivos vía SSH
       uses: appleboy/scp-action@v0.1.4
       with:
-        host: ${{ secrets.SERVER_IP }}
+        host: 201.163.93.2
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         port: ${{ secrets.SERVER_PORT }}
