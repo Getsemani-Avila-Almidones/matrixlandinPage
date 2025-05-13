@@ -38,8 +38,8 @@
     <h1>🧪 Proyectos Disponibles en la Matrix 🕶️</h1>
     <div class="project-list">
         <?php
-        $base = __DIR__;
-        $dirs = array_filter(glob($base . '../*'), 'is_dir');
+        $base = dirname(__DIR__);
+        $dirs = array_filter(glob($base . '/*'), 'is_dir');
 
         foreach ($dirs as $dir) {
             $name = basename($dir);
