@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Servidor de Proyectos</title>
+    <title>Matrix - Proyectos web</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,11 +39,14 @@
     <div class="project-list">
         <?php
         $base = __DIR__;
-        $dirs = array_filter(glob($base . '/*'), 'is_dir');
+        $dirs = array_filter(glob($base . '../*'), 'is_dir');
 
         foreach ($dirs as $dir) {
             $name = basename($dir);
-            echo "<a class='project' href='/$name/'>$name</a>";
+            if ($name !== "html"){
+                echo "<a class='project' href='/$name/'>$name</a>";
+            }
+            
         }
         ?>
     </div>
