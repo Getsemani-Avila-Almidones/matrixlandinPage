@@ -18,7 +18,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, Linux]
+    runs-on: self-hosted
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v3
