@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <h1>Proyectos Disponibles</h1>
+    <h1>😎 Proyectos Disponibles 🤓</h1>
     <div class="project-list">
         <?php
         $base = dirname(__DIR__);
