@@ -4,25 +4,43 @@
     <meta charset="UTF-8">
     <title>Matrix - Proyectos Web</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #282a36; /* Dracula background */
-            color: #f8f8f2; /* Dracula foreground */
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
             margin: 0;
             padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #282a36;
+            color: #f8f8f2;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
         }
         header, footer {
             background-color: #21222c;
-            padding: 1.5em;
-            text-align: center;
             color: #bd93f9;
+            text-align: center;
+            padding: 1.2em;
+            position: sticky;
+            z-index: 10;
+        }
+        header {
+            top: 0;
+        }
+        footer {
+            bottom: 0;
+            margin-top: auto;
         }
         header h1 {
             margin: 0;
             font-size: 2em;
         }
         main {
-            padding: 2em;
+            padding: 2em 1em;
+            flex: 1;
         }
         h2 {
             text-align: center;
@@ -31,21 +49,24 @@
             color: #bd93f9;
         }
         .project-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5em;
-            padding: 0 2em;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1em;
+            padding: 0 1em;
         }
         .project {
             background-color: #44475a;
-            padding: 1.2em 1em;
-            border-radius: 12px;
+            padding: 0.8em 1em;
+            border-radius: 10px;
             text-align: center;
             text-decoration: none;
             color: #f8f8f2;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             border: 1px solid #6272a4;
+            width: 180px;
+            font-weight: bold;
         }
         .project:hover {
             transform: translateY(-5px);
@@ -60,8 +81,8 @@
             h2 {
                 font-size: 1.4em;
             }
-            .project-list {
-                padding: 0 1em;
+            .project {
+                width: 100%;
             }
         }
     </style>
@@ -81,7 +102,37 @@
             foreach ($dirs as $dir) {
                 $name = basename($dir);
                 if ($name !== "html") {
-                    echo "<a class='project' href='/$name/'>$name</a>";
+                    $emoji = '📦'; // Por defecto (error amigable)
+                    $label = $name;
+
+                    // Intentar parsear por el último "_"
+                    if (strpos($name, '_') !== false) {
+                        $parts = explode('_', $name);
+                        $branch = strtolower(array_pop($parts));
+                        $project = implode('_', $parts);
+
+                        // Convertir proyecto a CamelCase
+                        $projectName = ucwords(strtolower(str_replace('_', ' ', $project)));
+                        $projectName = str_replace(' ', '', $projectName);
+
+                        // Asignar emoji según la rama
+                        switch ($branch) {
+                            case 'main':
+                                $emoji = '🟢';
+                                break;
+                            case 'dev':
+                                $emoji = '🧪';
+                                break;
+                            default:
+                                $emoji = '📦';
+                                break;
+                        }
+
+                        // Construir nombre visual
+                        $label = "{$projectName} {$emoji}";
+                    }
+
+                    echo "<a class='project' href='/$name/'>{$label}</a>";
                 }
             }
             ?>
