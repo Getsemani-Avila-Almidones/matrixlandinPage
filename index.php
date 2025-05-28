@@ -9,12 +9,25 @@
             background-color: #282a36; /* Dracula background */
             color: #f8f8f2; /* Dracula foreground */
             margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #21222c;
+            padding: 1.5em;
+            text-align: center;
+            color: #bd93f9;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        main {
             padding: 2em;
         }
-        h1 {
+        h2 {
             text-align: center;
             margin-bottom: 2em;
-            font-size: 2.2em;
+            font-size: 1.8em;
             color: #bd93f9;
         }
         .project-list {
@@ -41,8 +54,11 @@
             cursor: pointer;
         }
         @media (max-width: 600px) {
-            h1 {
+            header h1 {
                 font-size: 1.6em;
+            }
+            h2 {
+                font-size: 1.4em;
             }
             .project-list {
                 padding: 0 1em;
@@ -51,19 +67,29 @@
     </style>
 </head>
 <body>
-    <h1>😎 Proyectos Disponibles 🤓</h1>
-    <div class="project-list">
-        <?php
-        $base = dirname(__DIR__);
-        $dirs = array_filter(glob($base . '/*'), 'is_dir');
+    <header>
+        <h1>🌐 Bienvenido a Matrix Web Server 🌐</h1>
+    </header>
 
-        foreach ($dirs as $dir) {
-            $name = basename($dir);
-            if ($name !== "html") {
-                echo "<a class='project' href='/$name/'>$name</a>";
+    <main>
+        <h2>😎 Proyectos Disponibles 🤓</h2>
+        <div class="project-list">
+            <?php
+            $base = dirname(__DIR__);
+            $dirs = array_filter(glob($base . '/*'), 'is_dir');
+
+            foreach ($dirs as $dir) {
+                $name = basename($dir);
+                if ($name !== "html") {
+                    echo "<a class='project' href='/$name/'>$name</a>";
+                }
             }
-        }
-        ?>
-    </div>
+            ?>
+        </div>
+    </main>
+
+    <footer>
+        © <?php echo date("Y"); ?> Matrix Server. Desarrollado por Getsemani Ávila.
+    </footer>
 </body>
 </html>
