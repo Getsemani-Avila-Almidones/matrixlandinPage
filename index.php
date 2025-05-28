@@ -93,7 +93,7 @@
     </header>
 
     <main>
-        <h2>😎 Proyectos Disponibles 🤓</h2>
+        <h2>📤 Proyectos Disponibles 🗃️</h2>
         <div class="project-list">
             <?php
             $base = dirname(__DIR__);
@@ -124,12 +124,12 @@
                                 $emoji = '🧪';
                                 break;
                             default:
-                                $emoji = '📦';
+                                $emoji = '🦋';
                                 break;
                         }
 
                         // Construir nombre visual
-                        $label = "{$projectName} {$emoji}";
+                        $label = "{$emoji}\n{$projectName}";
                     }
 
                     echo "<a class='project' href='/$name/'>{$label}</a>";
@@ -140,7 +140,7 @@
     </main>
 
     <footer>
-        © <?php echo date("Y"); ?> Matrix Server. Desarrollado por Getsemani Ávila.
+        © <?php echo date("Y"); ?> Matrix Server. Desarrollado por Getsemani Ávila - Jefe de Applicaciones.
     </footer>
 </body>
 </html>
