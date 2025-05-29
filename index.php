@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Matrix - Proyectos Web</title>
+    <title>Matrix - 🌐 Proyectos Web ✨</title>
     <style>
         * {
             box-sizing: border-box;
