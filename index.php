@@ -166,14 +166,52 @@
     <button id="theme-toggle" class="theme-toggle"></button>
   </header>
 
-  <main>
-    <h2>Acceso a Aplicaciones</h2>
-    <div class="project-list">
-      <a class="project" href="/AlmexArch_Tool_main/">Almexarch Tool</a>
-      <a class="project" href="/TipoCambioSeguro_dev/">TipoCambioSeguro Dev</a>
-      <a class="project" href="/TipoCambioSeguro_main/">TipoCambioSeguro Main</a>
-    </div>
-  </main>
+    <main>
+        <h2>📤 Proyectos Disponibles 🗃️</h2>
+        <div class="project-list">
+            <?php
+            $base = dirname(__DIR__);
+            $dirs = array_filter(glob($base . '/*'), 'is_dir');
+
+            foreach ($dirs as $dir) {
+                $name = basename($dir);
+                if ($name !== "html") {
+                    $emoji = '📦'; // Por defecto (error amigable)
+                    $label = $name;
+
+                    // Intentar parsear por el último "_"
+                    if (strpos($name, '_') !== false) {
+                        $parts = explode('_', $name);
+                        $branch = strtolower(array_pop($parts));
+                        $project = implode('_', $parts);
+
+                        // Convertir proyecto a CamelCase
+                        $projectName = ucwords(strtolower(str_replace('_', ' ', $project)));
+                        $projectName = str_replace(' ', '', $projectName);
+
+                        // Asignar emoji según la rama
+                        switch ($branch) {
+                            case 'main':
+                                $emoji = '🟢';
+                                break;
+                            case 'dev':
+                                $emoji = '🧪';
+                                break;
+                            default:
+                                $emoji = '🦋';
+                                break;
+                        }
+
+                        // Construir nombre visual
+                        $label = "{$emoji}\n{$projectName}";
+                    }
+
+                    echo "<a class='project' href='/$name/'>{$label}</a>";
+                }
+            }
+            ?>
+        </div>
+    </main>
 
   <footer>
     © 2025 MATRIX · Desarrollado por Getsemani Ávila · Jefe de Aplicaciones
